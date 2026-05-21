@@ -1,37 +1,37 @@
 function initTerminal() {
-  const input = document.getElementById("input");
-  const output = document.getElementById("output");
+ const input = document.getElementById("input");
+ const output = document.getElementById("output");
 
-  if (!input || !output) return;
+ if (!input || !output) return;
 
-  console.log("terminal initialized");
+ console.log("terminal initialized");
 
-  function print(text) {
-    output.innerHTML += `<div>${text}</div>`;
-  }
+ function print(text) {
+ output.innerHTML += `<div>${text}</div>`;
+ }
 
-  input.addEventListener("keydown", async (e) => {
-    if (e.key !== "Enter") return;
+ input.addEventListener("keydown", async (e) => {
+ if (e.key !== "Enter") return;
 
-    const command = input.value.trim();
-    if (!command) return;
+ const command = input.value.trim();
+ if (!command) return;
 
-    print("> " + command);
+ print("> " + command);
 
-    const res = await fetch("/execute", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content
-      },
-      body: JSON.stringify({ command })
-    });
+const res = await fetch("/execute", {
+ method: "POST",
+ headers: {
+ "Content-Type": "application/json",
+ "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content
+ },
+ body: JSON.stringify({ command })
+ });
 
-    const data = await res.json();
-    print(data.output);
+ const data = await res.json();
+ print(data.output);
 
-    input.value = "";
-  });
+ input.value = "";
+});
 }
 
 document.addEventListener("turbo:load", initTerminal);
