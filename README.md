@@ -1,4 +1,4 @@
-# Web Terminal Simulator
+# Web Terminal Simulator (Under Development)
 
 **Web Terminal Simulator** is a secure, interactive web application built on the modern **Rails 8.1.3** stack. It provides users with a responsive, browser-based Linux terminal simulation, enabling them to run a controlled set of shell utilities directly from the web interface.
 
