@@ -1,6 +1,9 @@
 function initTerminal() {
+ let currentFolderId = 1;
  const input = document.getElementById("input");
  const output = document.getElementById("output");
+ let currentDir = ".";
+ let folder_id = 0;
 
  if (!input || !output) return;
 
@@ -24,10 +27,11 @@ const res = await fetch("/execute", {
  "Content-Type": "application/json",
  "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content
  },
- body: JSON.stringify({ command })
+ body: JSON.stringify({ command: command, folder_id: currentFolderId })
  });
 
  const data = await res.json();
+ currentFolderId = data.new_folder_id;
  print(data.output);
 
  input.value = "";
